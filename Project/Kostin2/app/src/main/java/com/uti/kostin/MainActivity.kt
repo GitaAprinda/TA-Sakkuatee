@@ -15,32 +15,57 @@ import com.uti.kostin.ui.theme.KostinTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // A surface container using the 'background' color from the theme
         setContent {
             KostinTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+
+            }
+        }
+    }
+
+    data class Item(val name: String)
+
+    @Composable
+    fun KostinApp() {
+        val items = listOf(
+            Item("Item 1"),
+            Item("Item 2"),
+            Item("Item 3"),
+            Item("Item 4"),
+            Item("Item 5"),
+            Item("Item 6"),
+            Item("Item 7"),
+            Item("Item 8"),
+            Item("Item 9"),
+            Item("Item 10")
+        )
+
+        KostinTheme {
+            Surface(color = MaterialTheme.colorScheme.background) {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(items) { item ->
+                        ItemCard(item)
+                    }
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    @Composable
+    fun ItemCard(item: Item) {
+        // Custom layout for displaying item
+        // Modify this according to your design
+        Text(
+            text = item.name,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KostinTheme {
-        Greeting("Android")
+
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        KostinTheme {
+        }
     }
 }
